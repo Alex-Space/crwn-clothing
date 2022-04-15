@@ -2,7 +2,7 @@ import './App.css';
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 import SignInAndSignUpPage from './pages/sing-in-and-sign-up/sing-in-and-sign-up.component';
-import { Routes, Route, Redirect } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/header/header.component';
 import React from 'react';
 import {auth, createUserProfileDocument} from './firebase/firebase.utils';
@@ -44,13 +44,13 @@ class App extends React.Component {
           <Route exect path='/' element={<HomePage />} />
           <Route path='/shop' element={<ShopPage />} />
           <Route 
-            path='/signin' 
-            render={() => 
-              this.props.currentUser ? (
-                <Redirect to='/' />
-              ) : (
+            path='/signin'
+            //element={<SignInAndSignUpPage />}
+            element={ 
+              this.props.currentUser ? 
+                <Navigate to='/' />
+              :
                 <SignInAndSignUpPage />
-              )
             } 
           />
         </Routes>
